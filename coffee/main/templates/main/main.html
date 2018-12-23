@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Starbuzz咖啡</title>
+   <link rel="stylesheet" href="{% static 'main/css/main1.css' %}">
+  </head> 
+
+  <body>
+  
+    <div id="header">
+      <img id="headerLogo"
+           src="{% static 'main/img/headerLogo.gif' %}" alt="Starbuzz Coffee logo image">
+      <img id="headerSlogan"
+           src="{% static 'main/img/headerSlogan.gif' %}" alt="Providing all the caffeine you need to power your life.">
+    </div>
+     {% include 'main/menu.html' %}
+<div id="tableContainer">
+  <div id="tableRow">
+  <div id="drinks">
+    <h1>饮料</h1>
+      <p>House Blend, $1.49</p>
+      <p>Mocha Cafe Latte, $2.35</p>
+      <p>卡布奇诺, $1.89</p>
+      <p>柴茶, $1.85</p>
+    <h1>酏剂</h1>
+      <p>
+        我们自豪地为我们的朋友在Head First 
+        Lounge酒吧酿造的长生不老药
+      </p>
+      <p>绿茶冷却器, $2.99</p>
+      <p>覆盆子冰浓度, $2.99</p>
+      <p>Blueberry Bliss Elixir, $2.99</p>
+      <p>蔓越莓抗氧化剂, $2.99</p>
+      <p>Chai Chiller, $2.99</p>
+      <p>Black Brain Brew, $2.99</p>
+  </div>
+    <div id="main">
+      <h1>优质咖啡，优质咖啡因</h1>
+      <p>
+       在Starbuzz Coffee，我们致力于通过优质的咖啡和茶来满足您对咖啡因的所有需求。当然，我
+        们希望您能享用一杯美味的咖啡和丰富的咖啡体验，但我们是唯一一家积极监控和优化咖啡因 
+        水平的公司。因此，请停下并填满您的杯子，或使用我们的新Bean Machine在线订购表在线订
+        购，并获得您认识的符合咖啡因标准的优质Starbuzz咖啡。
+      </p>
+      <p>
+        而且，我们提到过咖啡因吗？我们刚刚开始资助那些在Caffeine Buzz进行所有精彩研究的人。
+        如果您想要最新的咖啡和其他咖啡因产品，请停下来拜访他们。
+      </p>
+      <h1>我们的故事</h1>
+      <p>
+       “一个男人，一个计划，一个咖啡豆”。好吧，这不是一个回文，但它导致了一杯该死的好咖
+        啡。Starbuzz的首席执行官就是那个男人，你已经知道他的计划：每个角落都有一个Starbuzz。
+      </p> 
+      <p>I在短短的几年里，他执行了这个计划，今天你可以在任何地方享受Starbuzz。当然，今年的重
+        大新闻是Starbuzz与Head First读者合作创建了Starbuzz的Web存在，该网络正在迅速发展并有助
+        于满足全新客户的咖啡因需求。 
+      </p>
+      <h1>STARBUZZ咖啡饮料</h1>
+      <p>
+       我们在Starbuzz有各种含咖啡因的饮料可供选择，包括我们的 House Blend， Mocha Cafe Latte， Cappuccino，以及我们客户Chai Tea的最爱 。
+
+我们还提供各种咖啡豆，全部或地面，供您带回家。立即使用我们的在线Bean Machine订购您的咖啡 ，并将Starbuzz Coffee体验带回家。" title="Chai Tea">Chai Tea</a>.
+      </p>
+    </div>
+
+    <div id="sidebar">
+      <p class="beanheading">
+        <img src="{% static 'main/img/bag.gif' %}" alt="Bean Machine bag">
+        <br>
+        在线订购
+        <a href="form.html">BEAN MACHINE</a>
+        <br>
+        <span class="slogan">
+           快速<br>
+            新鲜 <br>
+            TO YOUR DOOR <br>
+        </span>
+      </p>
+      <p>
+      干嘛要等？您可以使用我们全新的自动化Bean Machine从互联
+      网上订购所有优质咖啡。它是如何工作的？只需点击Bean
+       Machine链接，输入您的订单，在幕后，您的咖啡就会被烘烤，
+      磨碎（如果您需要），打包并运到您的门口。
+      </p>
+    </div> <!-- sidebar -->
+  </div> <!-- tableRow -->
+  </div> <!-- tableContainer -->
+  
+   <div id="footer">
+      &copy; 2012, Starbuzz Coffee
+      <br>
+    本网站上出现的所有商标和注册商标均为其各自所有者的财产。
+    </div>
+
+  </body>
+</html>
+  
+    
