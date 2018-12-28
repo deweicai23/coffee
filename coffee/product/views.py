@@ -72,5 +72,70 @@ def productDelete(request, productId):
      product.delete()
      messages.success(request, '文章已刪除')  
      return redirect('product:product')
+ 
+ 
+def productLike(request, productId):
+    product = get_object_or_404(Product, id=productId)
+    if request.user not in product.likes.all():
+        product.likes.add(request.user)
+    return productRead(request, productId)
+
+
+def commentCreate(request, productId):
+    '''
+    Create a comment for an article:
+        1. Get the "comment" from the HTML form
+        2. Store it to database
+    '''
+    if request.method == 'GET':
+        return productRead(request, productId)
+
+    # POST
+    comment = request.POST.get('comment')
+    if comment:
+        comment = comment.strip()
+    if not comment:
+        return redirect('product:productRead', productId=productId)
+
+    product = get_object_or_404(Product, id=productId)
+    Comment.objects.create(product=product, user=request.user, content=comment)
+    return redirect('product:productRead', productId=productId)
+
+def commentDelete(request, commentId):
+   
+    comment = get_object_or_404(Comment, id=commentId)
+    product = get_object_or_404(Product, id=comment.product.id)
+    if request.method == 'GET':
+        return productRead(request, product.id)
+
+    # POST
+    if comment.user != request.user:
+        messages.error(request, '無刪除權限')
+        return redirect('product:productRead', productId=product.id)
+
+    comment.delete()
+    return redirect('product:productRead', productId=product.id)
+
+
+def commentUpdate(request, commentId):
+    
+    commentToUpdate = get_object_or_404(Comment, id=commentId)
+    product = get_object_or_404(Product, id=commentToUpdate.product.id)
+    if request.method == 'GET':
+        return productRead(request, product.id)
+
+    # POST
+    if commentToUpdate.user != request.user:
+        messages.error(request, '無修改權限')
+        return redirect('product:productRead', productId=product.id)
+
+    comment = request.POST.get('comment', '').strip()
+    if not comment:
+        commentToUpdate.delete()
+    else:
+        commentToUpdate.content = comment
+        commentToUpdate.save()
+    return redirect('product:productRead', productId=product.id)
+       
 
 

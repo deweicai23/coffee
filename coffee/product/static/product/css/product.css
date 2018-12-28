@@ -53,16 +53,21 @@ nav ul li a:link, nav ul li a:visited {
 .articleContent {
   padding: 20px;
   background-color: #b5a789;
-  border: 2px solid gray;
-  border-radius: 10px;
 }
 
 .commentDiv {
   margin-top: 1em;
+  border: 2px solid gray;
+  border-radius: 10px;
 }
 
-.comment {
+.comment, .commentAuthor {
   font-size: 0.8em;
+}
+
+.commentAuthor {
+  font-weight: bold;
+  color: #186caf;
 }
 
 .commentTime {
@@ -92,4 +97,14 @@ input[type=text] {
 
 #elixirs h3 {
   color: #d12c47;
+}
+
+.like {
+  font-weight: bold;
+  color: #3e7bd1;
+}
+
+img#like {
+  vertical-align: middle;
+  width: 1.6em;
 }

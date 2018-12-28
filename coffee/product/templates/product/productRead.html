@@ -4,8 +4,8 @@
   <head>
     <title>Starbuzz咖啡</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="{% static 'main/css/main2.css' %}">
-    <link rel="stylesheet" href="{% static 'product/css/product1.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/main1.css' %}">
+    <link rel="stylesheet" href="{% static 'product/css/product.css' %}">
   </head>
   <body>
    {% include 'main/messages.html' %}
@@ -23,13 +23,43 @@
         <img src="{% static 'product/img/coffee3.png' %}" alt="香草味甜奶油酿造" width="150" height="150">
       </p>
     {{ product.content|linebreaks }}
+    <p class="like">
+      <img id="like" src="{% static 'main/img/like1.png' %}" alt="Like"> {{ product.likes.count }}
+      {% if user.is_authenticated %}
+        <a href="{% url 'product:productLike' product.id %}">讚</a>
+      {% endif %}
+    </p>
     </div>
     {% for comment in comments %}
       <div class="commentDiv">
+      <span class="commentAuthor">{{ comment.user.fullName }}</span>
+      {% if comment.user != user %}
         <span class="comment">{{ comment.content }}</span>
-        <br>
+       {% else %}
+      <form class="inlineBlock" method="post" action="{% url 'product:commentUpdate' comment.id %}">
+        {% csrf_token %}
+        <input type="text" name="comment" value="{{ comment.content }}">
+        <input class="btn" type="submit" value="修改">
+      </form>
+      <form class="inlineBlock" method="post" action="{% url 'product:commentDelete' comment.id %}">
+        {% csrf_token %}
+        <input class="btn deleteConfirm" type="submit" value="刪除">
+      </form>
+      {% endif %}
+      <br>
         <span class="commentTime">{{ comment.pubDateTime|date:'Y-m-d H:i'}}</span>
       </div>
     {% endfor %}
+    {% if user.is_authenticated %}
+  <br>
+  <form method="post" action="{% url 'product:commentCreate' product.id %}">
+    {% csrf_token %}
+    <input type="text" name="comment"  placeholder="留言 ...">
+    <input class="btn" type="submit" value="送出">
+  </form>
+  <br><br>
+{% endif %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src={% static 'main/js/deleteConfirm1.js' %}></script>
   </body>
 </html>

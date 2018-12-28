@@ -1,4 +1,5 @@
 from populate import base
+from account.models import User
 from product.models import Product, Comment
 
 
@@ -9,7 +10,9 @@ def populate():
     print('Populating articles and comments ... ', end='')
     Product.objects.all().delete()
     Comment.objects.all().delete()
-
+    
+    
+    admin = User.objects.get(is_superuser=True)
     for title in titles:
         product = Product()
         product.title = title
@@ -17,7 +20,7 @@ def populate():
             product.content += title + '\n'
         product.save()
         for comment in comments:
-            Comment.objects.create(product=product, content=comment)
+            Comment.objects.create(product=product, user=admin, content=comment)
     print('done')
 
 
