@@ -1,0 +1,35 @@
+<!doctype html>
+{% load staticfiles %}
+<html>
+  <head>
+    <title>Starbuzz咖啡</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'main/css/main2.css' %}">
+    <link rel="stylesheet" href="{% static 'product/css/product1.css' %}">
+  </head>
+  <body>
+   {% include 'main/messages.html' %}
+   <div id="header">
+      <img id="headerLogo"
+           src="{% static 'main/img/headerLogo.gif' %}" alt="Starbuzz Coffee logo image">
+      <img id="headerSlogan"
+           src="{% static 'main/img/headerSlogan.gif' %}" alt="Providing all the caffeine you need to power your life.">
+    </div>
+    {% include 'main/menu.html' %}
+    <h3 class="inlineBlock">>{{ product.title }}</h3>
+    <a class="btn inlineBlock" href="{% url 'product:productUpdate' product.id %}">修改產品</a>
+    <div class="articleContent">
+    <p>
+        <img src="{% static 'product/img/coffee3.png' %}" alt="香草味甜奶油酿造" width="150" height="150">
+      </p>
+    {{ product.content|linebreaks }}
+    </div>
+    {% for comment in comments %}
+      <div class="commentDiv">
+        <span class="comment">{{ comment.content }}</span>
+        <br>
+        <span class="commentTime">{{ comment.pubDateTime|date:'Y-m-d H:i'}}</span>
+      </div>
+    {% endfor %}
+  </body>
+</html>

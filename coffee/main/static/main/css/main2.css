@@ -118,3 +118,20 @@ nav ul li a:link, nav ul li a:visited {
   background-color: #fbd9d8;
   border: thin solid red;
 }
+
+/* Button */
+.btn {
+  display: inline-block;
+  color: black;
+  font-size: 0.8em;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  border: thin solid gray;
+  background: linear-gradient(#f7f7f7, #dedede);
+}
+
+
+/* Misc */
+.inlineBlock {
+  display: inline-block;
+}
