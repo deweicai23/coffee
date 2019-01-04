@@ -13,5 +13,6 @@ urlpatterns = [
     path('commentCreate/<int:productId>/', views.commentCreate, name='commentCreate'),
     path('commentDelete/<int:commentId>/', views.commentDelete, name='commentDelete'),
     path('commentUpdate/<int:commentId>/', views.commentUpdate, name='commentUpdate'),
+    path('productOrder/',views.productOrder,name='productOrder'),
     
 ]

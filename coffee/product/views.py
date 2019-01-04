@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from product.models import Product,Comment
-from product.forms import ProductForm
+from product.forms import ProductForm,OrderForm
 from django.contrib import messages
 
 
@@ -136,6 +136,22 @@ def commentUpdate(request, commentId):
         commentToUpdate.content = comment
         commentToUpdate.save()
     return redirect('product:productRead', productId=product.id)
+
+def productOrder(request):
+    template = 'product/productOrder.html'
+    if request.method == 'GET':
+        return render(request, template, {'orderForm':OrderForm()})
+    
+    
+    
+    # POST
+    orderForm = OrderForm(request.POST)
+    if not orderForm.is_valid():
+        return render(request, template, {'orderForm':OrderForm})
+
+    orderForm.save()
+    messages.success(request, '產品已订购')
+    return redirect('product:product')
        
 
 

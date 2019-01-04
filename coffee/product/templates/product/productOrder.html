@@ -1,0 +1,28 @@
+<!doctype html>
+{% load staticfiles %}
+<html>
+  <head>
+    <title>Starbuzz咖啡</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'main/css/main1.css' %}">
+    <link rel="stylesheet" href="{% static 'product/css/product.css' %}">
+  </head>
+  <body>
+   {% include 'main/messages.html' %}
+   <div id="header">
+      <img id="headerLogo"
+           src="{% static 'main/img/headerLogo.gif' %}" alt="Starbuzz Coffee logo image">
+      <img id="headerSlogan"
+           src="{% static 'main/img/headerSlogan.gif' %}" alt="Providing all the caffeine you need to power your life.">
+    </div>
+    {% include 'main/menu.html' %}
+    <h2>Starbuzz咖啡订购單</h2>
+    <form method="post" action="{% url 'product:productOrder' %}">
+      {% csrf_token %}
+      {{ orderForm.as_p }}
+      <input type="submit" value="送出">
+    </form>
+  </body>
+</html>
+    
+    
