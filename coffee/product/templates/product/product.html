@@ -21,7 +21,7 @@
      <p><a class="btn" href="{% url 'product:productCreate' %}">新增產品</a></p>
       {% for product in products %}
       <p>
-        <img src="{% static 'product/img/coffee3.png' %}" alt="香草味甜奶油酿造" width="100" height="100">
+        <img src="{% static 'product/img/' %}coffee{{ forloop.counter }}.png" alt="香草味甜奶油酿造" width="100" height="100">
       </p>
       <h3 class="inlineBlock"><a href="{% url 'product:productRead' product.id %}">{{ product.title }}</a></h3> 
       <form class="inlineBlock" method="post" action="{% url 'product:productDelete' product.id %}">

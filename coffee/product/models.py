@@ -6,7 +6,7 @@ from account.models import User
 class Product(models.Model):
     title = models.CharField(max_length=128, unique=True)
     content = models.TextField()
-    sale = models.IntegerField()
+    sale = models.CharField(max_length=128)
     pubDateTime = models.DateTimeField(auto_now_add=True)
     likes = models.ManyToManyField(User)
 
@@ -35,7 +35,7 @@ class Comment(models.Model):
 class Order(models.Model):
     fullName = models.CharField(max_length=128)
     address = models.CharField(max_length=128)
-    phone = models.IntegerField()
+    phone = models.CharField(max_length=12)
     number = models.IntegerField()
     
     

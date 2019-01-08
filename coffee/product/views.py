@@ -58,7 +58,7 @@ def productUpdate(request, productId):
         return render(request, template, {'productForm':productForm})
 
     productForm.save()
-    messages.success(request, '文章已修改') 
+    messages.success(request, '產品已修改') 
     return redirect('product:productRead', productId=productId)
 
 
@@ -70,7 +70,7 @@ def productDelete(request, productId):
     # POST
      product = get_object_or_404(Product, id=productId) 
      product.delete()
-     messages.success(request, '文章已刪除')  
+     messages.success(request, '產品已刪除')  
      return redirect('product:product')
  
  
