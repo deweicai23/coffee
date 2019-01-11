@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from product.models import Product,Comment
 from product.forms import ProductForm,OrderForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from main.views import admin_required
 
 
 
@@ -28,7 +30,7 @@ def productRead(request, productId):
     }
     return render(request, 'product/productRead.html', context)
 
-
+@admin_required
 def productCreate(request):
     template = 'product/productCreateUpdate.html'
     if request.method == 'GET':
@@ -45,6 +47,8 @@ def productCreate(request):
     messages.success(request, '產品已新增')
     return redirect('product:product')
 
+
+@admin_required
 def productUpdate(request, productId):
     product = get_object_or_404(Product, id=productId)
     template = 'product/productCreateUpdate.html'
@@ -61,7 +65,7 @@ def productUpdate(request, productId):
     messages.success(request, '產品已修改') 
     return redirect('product:productRead', productId=productId)
 
-
+@admin_required
 def productDelete(request, productId):
     
      if request.method == 'GET':
@@ -73,14 +77,14 @@ def productDelete(request, productId):
      messages.success(request, '產品已刪除')  
      return redirect('product:product')
  
- 
+@login_required 
 def productLike(request, productId):
     product = get_object_or_404(Product, id=productId)
     if request.user not in product.likes.all():
         product.likes.add(request.user)
     return productRead(request, productId)
 
-
+@login_required
 def commentCreate(request, productId):
     '''
     Create a comment for an article:
@@ -101,6 +105,7 @@ def commentCreate(request, productId):
     Comment.objects.create(product=product, user=request.user, content=comment)
     return redirect('product:productRead', productId=productId)
 
+@login_required
 def commentDelete(request, commentId):
    
     comment = get_object_or_404(Comment, id=commentId)
@@ -116,7 +121,7 @@ def commentDelete(request, commentId):
     comment.delete()
     return redirect('product:productRead', productId=product.id)
 
-
+@login_required
 def commentUpdate(request, commentId):
     
     commentToUpdate = get_object_or_404(Comment, id=commentId)

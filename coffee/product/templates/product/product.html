@@ -18,16 +18,20 @@
     {% include 'main/menu.html' %}
     <div id="elixirs">
      <h2>Weekly Elixir Specials</h2>
+     {% if user.is_superuser %}
      <p><a class="btn" href="{% url 'product:productCreate' %}">新增產品</a></p>
+      {% endif %}
       {% for product in products %}
       <p>
         <img src="{% static 'product/img/' %}coffee{{ forloop.counter }}.png" alt="香草味甜奶油酿造" width="100" height="100">
       </p>
-      <h3 class="inlineBlock"><a href="{% url 'product:productRead' product.id %}">{{ product.title }}</a></h3> 
+      <h3 class="inlineBlock"><a href="{% url 'product:productRead' product.id %}">{{ product.title }}</a></h3>
+       {% if user.is_superuser %} 
       <form class="inlineBlock" method="post" action="{% url 'product:productDelete' product.id %}">
     {% csrf_token %}
     <input class="btn deleteConfirm" type="submit" value="刪除">
-  </form>   
+  </form>
+  {% endif %}   
       {% endfor %}
       
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
