@@ -24,6 +24,9 @@ SECRET_KEY = 'risbua!y424j(md4ot93bl(22y)oqbla##c!4yrp0wyr6hx6^@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+if 'DYNO' in os.environ:    # Running on Heroku
+    DEBUG = False
+
 
 ALLOWED_HOSTS = ['*']
 
@@ -77,8 +80,9 @@ WSGI_APPLICATION = 'coffee.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
+if DEBUG:   # Running on the development environment
+    DATABASES = {
+      'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'coffeeDB',
         'USER': 'coffee',
@@ -87,6 +91,13 @@ DATABASES = {
         'PORT': '',
     }
 }
+    
+else:   # Running on Heroku
+    # Parse database configuration from $DATABASE_URL
+    import dj_database_url
+    DATABASES = {'default':dj_database_url.config()}
+    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Password validation
@@ -129,4 +140,7 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'account.User'
 
 LOGIN_URL = '/account/login/'
+
+# For Heroku deployment
+STATIC_ROOT = 'staticfiles'
 
