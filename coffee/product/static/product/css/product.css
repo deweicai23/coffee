@@ -115,3 +115,8 @@ img#like {
   font-size:110%;
   color:#954b4b;
 }
+
+.btn {
+  font-family: Arial;
+  display: inline-block;
+}
